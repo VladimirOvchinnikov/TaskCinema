@@ -1,31 +1,31 @@
 package com.bnw.taskcinema.service;
 
-import com.bnw.taskcinema.model.Test;
-import com.bnw.taskcinema.repository.TestRepository;
+import com.bnw.taskcinema.model.Echo;
+import com.bnw.taskcinema.repository.EchoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TestService {
+public class EchoService {
 
     @Autowired
-    private TestRepository testRepository;
+    private EchoRepository testRepository;
 
-    public List<Test> findAll() {
+    public List<Echo> findAll() {
         return testRepository.findAll();
     }
 
-    public Test findById(Integer id) {
+    public Echo findById(Integer id) {
         return testRepository.findById(id).orElse(null);
     }
 
-    public Test save(Test entity) {
+    public Echo save(Echo entity) {
         return testRepository.save(entity);
     }
 
-    public Test update(Test entity) {
+    public Echo update(Echo entity) {
         return testRepository.save(entity);
     }
 

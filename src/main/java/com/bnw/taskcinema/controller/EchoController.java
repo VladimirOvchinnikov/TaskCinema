@@ -1,40 +1,49 @@
 package com.bnw.taskcinema.controller;
 
-import com.bnw.taskcinema.facade.TestFacade;
-import com.bnw.taskcinema.model.Test;
+import com.bnw.taskcinema.dto.EchoDto;
+import com.bnw.taskcinema.facade.EchoFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/cinema")
+//@RequestMapping("/cinema")
+@RequestMapping("${base.url}/echo")
 public class EchoController {
 
     private static final Logger LOG = LoggerFactory.getLogger(EchoController.class);
 
 
     @Autowired
-    private TestFacade testFacade;
+    private EchoFacade facade;
 
 
-    @GetMapping("/echo")
-    public ResponseEntity<String> echo() {
-        LOG.info("info echo");
-        LOG.debug("debug echo");
-        return ResponseEntity.ok("echo");
+    @GetMapping("/list")
+    public ResponseEntity<List<EchoDto>> findList() {
+        return ResponseEntity.ok(facade.findAll());
     }
 
 
-    @GetMapping("/test")
-    public ResponseEntity<List<Test>> test() {
+    @PostMapping()
+    public ResponseEntity<EchoDto> create(@RequestBody EchoDto dto) {
+        return ResponseEntity.ok(facade.create(dto));
+    }
 
-        return ResponseEntity.ok(testFacade.findAll());
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EchoDto> update(@PathVariable(value = "id", required = true) Integer id, @RequestBody EchoDto dto) {
+        dto.setId(id);
+        return ResponseEntity.ok(facade.update(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable(value = "id", required = true) Integer id) {
+        facade.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 
