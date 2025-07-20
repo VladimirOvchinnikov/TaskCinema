@@ -1,11 +1,13 @@
 package com.bnw.taskcinema.dto;
 
 
+import com.bnw.taskcinema.dto.common.IDto;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class EchoDto {
+public class EchoDto implements IDto {
 
 
     private Integer id;
@@ -14,8 +16,8 @@ public class EchoDto {
     private LocalDate birthday;
     private LocalTime startCheck;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Integer repeat;
-
 
 
     public Integer getId() {
@@ -64,6 +66,14 @@ public class EchoDto {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Integer getRepeat() {

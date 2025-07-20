@@ -1,88 +1,72 @@
 package com.bnw.taskcinema.model;
 
+import com.bnw.taskcinema.model.common.*;
+import com.bnw.taskcinema.model.common.converter.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "echo")
-public class Echo {
+public class Echo extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rid")
-    private Integer id;
     @Column(name = "name")
-    private String name;
+    @Convert(converter = StringFieldValueConverter.class)
+    private StringFieldValue name = new StringFieldValue();
     @Column(name = "is_loves_Narcissus")
-    private Boolean isLovesNarcissus;
+    @Convert(converter = BooleanFieldValueConverter.class)
+    private BooleanFieldValue isLovesNarcissus = new BooleanFieldValue();
     @Column(name = "birthday")
-    private LocalDate birthday;
+    @Convert(converter = LocalDateFieldValueConverter.class)
+    private LocalDateFieldValue birthday = new LocalDateFieldValue();
     @Column(name = "start_check")
-    private LocalTime startCheck;
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @Convert(converter = LocalTimeFieldValueConverter.class)
+    private LocalTimeFieldValue startCheck = new LocalTimeFieldValue();
     @Column(name = "repeat")
-    private Integer repeat;
+    @Convert(converter = IntegerFieldValueConverter.class)
+    private IntegerFieldValue repeat = new IntegerFieldValue();
 
 
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.setValue(name);
     }
 
     public Boolean getIsLovesNarcissus() {
-        return isLovesNarcissus;
+        return isLovesNarcissus.getValue();
     }
 
     public void setIsLovesNarcissus(Boolean lovesNarcissus) {
-        isLovesNarcissus = lovesNarcissus;
+        isLovesNarcissus.setValue(lovesNarcissus);
     }
 
     public LocalDate getBirthday() {
-        return birthday;
+        return birthday.getValue();
     }
 
     public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+        this.birthday.setValue(birthday);
     }
 
     public LocalTime getStartCheck() {
-        return startCheck;
+        return startCheck.getValue();
     }
 
     public void setStartCheck(LocalTime startCheck) {
-        this.startCheck = startCheck;
+        this.startCheck.setValue(startCheck);
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 
     public Integer getRepeat() {
-        return repeat;
+        return repeat.getValue();
     }
 
     public void setRepeat(Integer repeat) {
-        this.repeat = repeat;
+        this.repeat.setValue(repeat);
     }
 }
